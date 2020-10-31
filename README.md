@@ -1,5 +1,9 @@
 # Auto Night Mode
 
+Download:
+* [Auto Night Mode](https://github.com/Masterflitzer/Auto-Night-Mode/archive/main.zip)
+* [Powershell](https://github.com/PowerShell/PowerShell.git)
+
 Usage: `.\auto-night-mode.ps1 [[-mode] auto] [[-morning] 08:00:00] [[-evening] 20:00:00]`
 
 This script toggles the Windows 10 dark or light mode if it is executed without arguments.
