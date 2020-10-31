@@ -1,7 +1,7 @@
 param (
-    [string] $mode,
-    [string] $morning,
-    [string] $evening
+    [string, ValidateSet('auto')] $mode,
+    [string, ValidateSet('08:00:00')] $morning,
+    [string, ValidateSet('20:00:00')] $evening
 )
 # Establishes and enforces coding rules in expressions, scripts, and script blocks.
 Set-StrictMode -Version Latest
