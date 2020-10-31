@@ -1,7 +1,7 @@
 # Auto Night Mode
 
 Download:
-* [Auto Night Mode](https://github.com/Masterflitzer/Auto-Night-Mode/archive/main.zip)
+* [Auto Night Mode](https://github.com/masterflitzer/auto-night-mode/archive/main.zip)
 * [Powershell](https://github.com/PowerShell/PowerShell.git)
 
 Usage: `.\auto-night-mode.ps1 [[-mode] auto] [[-morning] 08:00:00] [[-evening] 20:00:00]`
