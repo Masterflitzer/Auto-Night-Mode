@@ -64,7 +64,7 @@ function set_registry_keys {
 function auto_night_mode {
     # check if variables exists
     if ($morning.Length -eq 0) { $morning = '08:00:00' }
-    if ($evening.Length -eq 0) { $evening = '22:00:00' }
+    if ($evening.Length -eq 0) { $evening = '20:00:00' }
     # split the strings
     $morning = split_string($morning)
     $evening = split_string($evening)
