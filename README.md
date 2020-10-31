@@ -1,8 +1,6 @@
 # Auto Night Mode
 
-Usage: 
-* .\auto-night-mode.ps1 [[-mode] auto] [[-morning] 08:00:00] [[-evening] 20:00:00]
-* .\auto-night-mode.ps1 [[-mode] auto] [[-morning] 080000] [[-evening] 200000]
+Usage: .\auto-night-mode.ps1 [[-mode] auto] [[-morning] 08:00:00] [[-evening] 20:00:00]
 
 This script toggles the Windows 10 dark or light mode if it is executed without arguments.
 
