@@ -16,8 +16,9 @@ $int_current_time = 0
 #$morning = '08:00:00'
 #$evening = '20:00:00'
 
-# create some strings (path to registry keys of the windows theme)
-$path = 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize'
+# create some strings (path to registry keys of the windows theme) #S-1-5-21-843363826-3786156048-1633012339-1001
+#$path = 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize'
+$path = 'SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize'
 $name_system = 'SystemUsesLightTheme'
 $name_apps = 'AppsUseLightTheme'
 
@@ -56,9 +57,22 @@ function time_math {
 
 function set_registry_keys {
     param([int] $value)
-    # set some registry entries (set registry keys to change windows theme)
-    New-ItemProperty -Path $path -Name $name_system -Type Dword -Force -Value $value
-    New-ItemProperty -Path $path -Name $name_apps -Type Dword -Force -Value $value
+    # mount HKEY_Users
+    $HKU = Get-PSDrive HKU -ea silentlycontinue
+    if (!$HKU ) {
+        New-PSDrive -Name HKU -PsProvider Registry HKEY_USERS | out-null
+        Set-Location HKU:
+    }
+    # select all desired user profiles, exlude *_classes & .DEFAULT
+    $regProfiles = Get-ChildItem -Path HKU: | Where-Object { ($_.PSChildName.Length -gt 8) -and ($_.PSChildName -notlike "*_class") -and ($_.PSChildName -notlike "*.DEFAULT") }
+    # loop through all selected profiles & delete registry
+    ForEach ($profile in $regProfiles ) {
+        If (Test-Path -Path HKU:\$profile\$path) {
+            # set some registry entries (set registry keys to change windows theme)
+            New-ItemProperty -Path HKU:\$profile\$path -Name $name_system -Type Dword -Force -Value $value
+            New-ItemProperty -Path HKU:\$profile\$path -Name $name_apps -Type Dword -Force -Value $value
+        }
+    }
 }
 
 function auto_night_mode {
@@ -92,7 +106,7 @@ function auto_night_mode {
 
 function toggle_night_mode {
     # return value of registry key (only for system theme)
-    return (Get-ItemProperty -Path $path).$name_system
+    return (Get-ItemProperty -Path HKCU:\$path).$name_system
 }
 
 # run the script
