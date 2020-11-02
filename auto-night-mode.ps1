@@ -111,3 +111,4 @@ function toggle_night_mode {
 
 # run the script
 main
+#Read-Host -Prompt "Press Enter to continue...: "
